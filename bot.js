@@ -23,7 +23,7 @@ client.on('guildDelete', (guild) => {
 
 client.on('message', (msg) => {
   //temporary prefix (we'll change this later)
-  const prefix = server.getItem(prefix);
+  const prefix = server.getItem('prefix');
 
   memeChannelVoting(msg);
 
