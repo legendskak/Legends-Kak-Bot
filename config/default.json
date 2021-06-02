@@ -1,0 +1,5 @@
+// !Elad
+// here you can put anything you need to store for the server
+{
+    "var": "value"
+}
