@@ -25,15 +25,10 @@ async function getDocData(data) {
   return doc.data();
 }
 
-var prefix = null;
-var guildID = null;
-var guildName = null;
 
 function docData(doc) {
   getDocData(doc).then((result) => {
-    prefix = result["prefix"];
-    guildID = result['guildID'];
-    guildName = result['guildName'];
+
   });
 }
 
@@ -44,9 +39,7 @@ export default function () {
   const guild = guildData.doc(serverName);
   const serverData = guild.collection(serverName + "-GUILD-DATA");
   const prefixData = serverData.doc("prefix");
-  prefixData.set({
-    prefix: "kak"
-  });
+
 
 }
 

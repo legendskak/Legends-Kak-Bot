@@ -4,7 +4,6 @@ const items = {
   prefix: '!',
 };
 
-//!ELAD
 function getItem(item) {
   return items[item];
 }
@@ -12,5 +11,7 @@ function getItem(item) {
 function setItem(item, newValue) {
   items[item] = newValue;
 }
+
+
 
 export { getItem, setItem };
