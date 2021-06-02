@@ -1,9 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
+import fetch from 'node-fetch';
 
 //files
-import connectToDatabase from './config/connectToDataBase.js';
+// import connectToDatabase from './config/connectToDataBase.js';
 
 const port = process.env.PORT;
 express()
@@ -12,7 +13,7 @@ express()
     })
 
     .listen(port, () => console.log(`Server started on port: ${port}`));
-connectToDatabase();
+// connectToDatabase();
 import './bot.js';
 
 if (!process.env.ISDEV) {

@@ -4,6 +4,7 @@ dotenv.config();
 
 //files
 import { Ping, Help } from './commands.js';
+import { memeChannelVoting } from './auto.js';
 
 const client = new Discord.Client();
 
@@ -20,6 +21,8 @@ client.on('guildDelete', (guild) => {
 client.on('message', (msg) => {
     //temporary prefix (we'll change this later)
     const prefix = '!';
+
+    memeChannelVoting(msg);
 
     if (!msg.content.substr(0, prefix.length) === prefix) return;
     msg.content = msg.content.substr(prefix.length);
