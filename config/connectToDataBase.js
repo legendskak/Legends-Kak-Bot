@@ -34,11 +34,11 @@ export default function () {
     const db = firebase.firestore();
     const guildData = db.collection('guild-data');
     const guild = guildData.doc(serverName);
-    const serverData = guild.collection(serverName + '-' + 'GUILD-DATA');
+    const serverData = guild.collection(serverName + '-GUILD-DATA');
     const prefixData = serverData.doc('prefix');
-    prefixData.set({
-        'prefix': 'kak'
-    })
 
-    //we need to store the prefix
+    const prefix = 'kak'; // change later
+    prefixData.set({
+        'prefix': prefix
+    })
 }
