@@ -8,19 +8,19 @@ import fetch from 'node-fetch';
 
 const port = process.env.PORT;
 express()
-  .get('/', (req, res) => {
-    res.sendStatus(200);
-  })
+    .get('/', (req, res) => {
+        res.sendStatus(200);
+    })
 
-  .listen(port, () => console.log(`Server started on port: ${port}`));
+    .listen(port, () => console.log(`Server started on port: ${port}`));
 // connectToDatabase();
 import './bot.js';
 
 if (!process.env.ISDEV) {
-  let i = 0;
-  setInterval(async () => {
-    await fetch('https://tatsy-bot.herokuapp.com/');
-    console.log(`PING! (${i})`);
-    i++;
-  }, 1740000);
+    let i = 0;
+    setInterval(async () => {
+        await fetch('https://tatsy-bot.herokuapp.com/');
+        console.log(`PING! (${i})`);
+        i++;
+    }, 1740000);
 }

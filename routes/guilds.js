@@ -1,17 +1,20 @@
-const items = {
-  guildID: 'guildID',
-  guildName: 'Server Name',
-  prefix: '!',
-};
+import data from '../config/connectToDataBase.js';
 
-function getItem(item) {
-  return items[item];
+async function getItem(item) {
+    const serverData = await (await data.serverData.doc(item).get(item)).data()[
+        'item'
+    ];
+    return await serverData;
 }
 
-function setItem(item, newValue) {
-  items[item] = newValue;
+function setItem(item, value) {
+    data.serverData.doc(item).set({
+        item: value,
+    });
 }
 
-
+function createServer(guildName, guildID, defaultPrefix) {
+    data.guildData.doc(guildName).set({});
+}
 
 export { getItem, setItem };

@@ -1,9 +1,11 @@
-export default function Temp() {
-    this.name = 'name';
-    this.description = 'description';
+import * as server from '../routes/guilds.js';
+
+function Prefix() {
+    this.name = 'prefix';
+    this.description = 'gets the current prefix of the bot';
     this.role = 'everyone';
     this.prefixType = 'prefix';
-    this.args = ['arg1', 'arg2', 'arg3'];
+    this.args = [];
     let argsText = '';
     this.args.forEach((arg) => {
         argsText = `${argsText} <${arg}>`;
@@ -17,8 +19,8 @@ export default function Temp() {
         prefixText = '';
     }
     this.read = `${prefixText}${this.name}${argsText}`;
-    this.err = true;
-    this.errMsg = 'ERROR MESSAGE';
+    this.err = false;
+    this.errMsg = '';
 
     this.run = (msg) => {
         try {
@@ -32,8 +34,8 @@ export default function Temp() {
     };
 
     this.execute = (msg) => {
-        msg.reply('test');
+        msg.reply(`The current prefix is: ${server.getItem('prefix')}`);
     };
 }
 
-console.log(new Temp().read);
+export { Prefix };

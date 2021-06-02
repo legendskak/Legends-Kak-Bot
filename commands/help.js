@@ -7,15 +7,34 @@ export default function () {
     this.name = 'help';
     this.description = 'Sends you a list of all of the commands';
     this.role = 'everyone';
-    this.prefix = true;
+    this.prefix = 'prefix';
     this.args = [];
     let argsText = '';
     this.args.forEach((arg) => {
         argsText = `${argsText} <${arg}>`;
     });
-    this.read = `${this.prefix ? '[prefix]' : ''}${this.name}${argsText}`;
+    let prefixText;
+    if (this.prefixType === 'prefix') {
+        prefixText = '[prefix]';
+    } else if (this.prefixType === 'mention') {
+        prefixText = `<@!${client.user.id}> `;
+    } else {
+        prefixText = '';
+    }
+    this.read = `${prefixText}${this.name}${argsText}`;
 
     this.run = (msg) => {
+        try {
+            this.execute();
+        } catch (err) {
+            console.error(err);
+            if (err === true) {
+                msg.reply(`:octagonal_sign:**Error**: ${this.errMsg}`);
+            }
+        }
+    };
+
+    this.execute = (msg) => {
         const embed = new Discord.MessageEmbed()
             .setColor('#FF9A1A')
             .setTitle('List of Commands:');
