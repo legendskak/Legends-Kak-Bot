@@ -1,29 +1,52 @@
 import config from 'config';
-import firebase from 'firebase';
-var firebaseConfig = {
-    apiKey: 'AIzaSyB8vGX3QbxahZ8euQviNLTHTB8gPVxFM6k',
-    authDomain: 'react-thebackdoor.firebaseapp.com',
-    projectId: 'react-thebackdoor',
-    storageBucket: 'react-thebackdoor.appspot.com',
-    messagingSenderId: '920210020669',
-    appId: '1:920210020669:web:02fb6f59678cd055644d54',
-    measurementId: 'G-4G45L5S9JR',
-};
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-} else {
-    firebase.app();
-}
+import firebase from "firebase/app";
+import "firebase/firestore";
+import 'firebase/analytics';
 
+var firebaseConfig = {
+  apiKey: "AIzaSyBylRAbrNUWQRkppjgE6vwr11Xaue70vls",
+  authDomain: "legends-bot-6a482.firebaseapp.com",
+  projectId: "legends-bot-6a482",
+  storageBucket: "legends-bot-6a482.appspot.com",
+  messagingSenderId: "801454364629",
+  appId: "1:801454364629:web:85cd14c5bd2d83869acf5c",
+  measurementId: "G-G107FR5SGK"
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app();
+}
 firebase.analytics();
 
-//!Elad
-export default function () {
-    //firebase stuff
-    console.log('firebase stuff');
-
-    //this is how u use config
-    console.log(`config var: ${config.get('var')}`);
-
-    //we need to store the prefix
+async function getDocData(data) {
+  const doc = await data.get();
+  return doc.data();
 }
+
+var prefix = null;
+var guildID = null;
+var guildName = null;
+
+function docData(doc) {
+  getDocData(doc).then((result) => {
+    prefix = result["prefix"];
+    guildID = result['guildID'];
+    guildName = result['guildName'];
+  });
+}
+
+export default function () {
+  const serverName = "LEGENDS"; //later will update to make it read server name
+  const db = firebase.firestore();
+  const guildData = db.collection("guild-data");
+  const guild = guildData.doc(serverName);
+  const serverData = guild.collection(serverName + "-GUILD-DATA");
+  const prefixData = serverData.doc("prefix");
+  prefixData.set({
+    prefix: "kak"
+  });
+
+}
+
