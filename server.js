@@ -4,7 +4,6 @@ dotenv.config();
 import fetch from 'node-fetch';
 
 //files
-// import connectToDatabase from './config/connectToDataBase.js';
 
 const port = process.env.PORT;
 express()
@@ -13,14 +12,15 @@ express()
     })
 
     .listen(port, () => console.log(`Server started on port: ${port}`));
-// connectToDatabase();
 import './bot.js';
 
-if (!process.env.ISDEV) {
+console.log(process.env.ISDEV);
+if (process.env.ISDEV === 'false') {
+    console.log('running isdev');
     let i = 0;
     setInterval(async () => {
         await fetch('https://legends-kak-bot.herokuapp.com/');
         console.log(`PING! (${i})`);
         i++;
-    }, 60000);
+    }, 1740000);
 }
