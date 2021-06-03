@@ -22,5 +22,5 @@ if (!process.env.ISDEV) {
         await fetch('https://legends-kak-bot.herokuapp.com/');
         console.log(`PING! (${i})`);
         i++;
-    }, 1740000);
+    }, 60000);
 }
