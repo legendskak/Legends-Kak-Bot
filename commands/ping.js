@@ -1,8 +1,10 @@
+import { client } from '../bot.js';
+
 export default function () {
     this.name = 'ping';
     this.description = 'Pings the bot and waits for a response';
     this.role = 'everyone';
-    this.prefix = 'prefix';
+    this.prefixType = 'prefix';
     this.args = [];
     let argsText = '';
     this.args.forEach((arg) => {
@@ -18,9 +20,10 @@ export default function () {
     }
     this.read = `${prefixText}${this.name}${argsText}`;
 
-    this.run = (msg) => {
+    this.run = (args) => {
+        const { msg } = args;
         try {
-            this.execute();
+            this.execute(args);
         } catch (err) {
             console.error(err);
             if (err === true) {
@@ -29,7 +32,8 @@ export default function () {
         }
     };
 
-    this.execute = (msg) => {
+    this.execute = (args) => {
+        const { msg } = args;
         msg.reply('pong!');
     };
 }

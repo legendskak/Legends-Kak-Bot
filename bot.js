@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 //files
-import { Ping, Help } from './commands.js';
+import { Ping, Help, Prefix, SetPrefix } from './commands.js';
 import { memeChannelVoting } from './auto.js';
 
 //routes
@@ -29,39 +29,37 @@ client.on('message', async (msg) => {
 
     memeChannelVoting(msg, client);
 
-    console.log(prefix);
-
     //if msg.content starts with prefix
     if (msg.content.substr(0, prefix.length) === prefix) {
         msg.content = msg.content.substr(prefix.length);
         const query = msg.content.split(' ');
 
-        console.log('has prefix');
-
-        switch (query[0]) {
+        switch (query[0].toLowerCase()) {
             case 'help':
-                new Help().run(msg);
+                new Help().run({ msg });
                 break;
             case 'ping':
-                new Ping().run(msg);
+                new Ping().run({ msg });
+                break;
+            case 'setprefix':
+                new SetPrefix().run({ msg, query });
                 break;
         }
     }
 
     //if msg.content starts with bot mention
     if (msg.content.substr(0, botMention.length + 1) === `${botMention} `) {
-        msg.content = msg.content.substr(prefix.length);
+        msg.content = msg.content.substr(botMention.length + 1);
         const query = msg.content.split(' ');
 
         switch (query[0]) {
             case 'prefix':
-                new Help().run(msg);
-                break;
-            case 'ping':
-                new Ping().run(msg);
+                new Prefix().run({ msg });
                 break;
         }
     }
 });
 
 client.login(process.env.TOKEN);
+
+export { client };

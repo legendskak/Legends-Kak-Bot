@@ -1,3 +1,4 @@
+import { client } from '../bot.js';
 import Discord from 'discord.js';
 
 //files
@@ -7,7 +8,7 @@ export default function () {
     this.name = 'help';
     this.description = 'Sends you a list of all of the commands';
     this.role = 'everyone';
-    this.prefix = 'prefix';
+    this.prefixType = 'mention';
     this.args = [];
     let argsText = '';
     this.args.forEach((arg) => {
@@ -23,9 +24,10 @@ export default function () {
     }
     this.read = `${prefixText}${this.name}${argsText}`;
 
-    this.run = (msg) => {
+    this.run = (args) => {
+        const { msg } = args;
         try {
-            this.execute();
+            this.execute(args);
         } catch (err) {
             console.error(err);
             if (err === true) {
@@ -34,7 +36,8 @@ export default function () {
         }
     };
 
-    this.execute = (msg) => {
+    this.execute = (args) => {
+        const { msg } = args;
         const embed = new Discord.MessageEmbed()
             .setColor('#FF9A1A')
             .setTitle('List of Commands:');
@@ -51,6 +54,6 @@ export default function () {
             'https://github.com/legendskak/Legends-Bot'
         );
 
-        msg.member.send(embed);
+        msg.author.send(embed);
     };
 }

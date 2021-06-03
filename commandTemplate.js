@@ -1,3 +1,5 @@
+import { client } from '../bot.js';
+
 export default function Temp() {
     this.name = 'name';
     this.description = 'description';
@@ -20,9 +22,10 @@ export default function Temp() {
     this.err = true;
     this.errMsg = 'ERROR MESSAGE';
 
-    this.run = (msg) => {
+    this.run = (args) => {
+        const { msg } = args;
         try {
-            this.execute();
+            this.execute(args);
         } catch (err) {
             console.error(err);
             if (err === true) {
@@ -31,7 +34,8 @@ export default function Temp() {
         }
     };
 
-    this.execute = (msg) => {
+    this.execute = (args) => {
+        const { msg } = args;
         msg.reply('test');
     };
 }
