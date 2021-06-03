@@ -14,9 +14,7 @@ express()
     .listen(port, () => console.log(`Server started on port: ${port}`));
 import './bot.js';
 
-console.log(process.env.ISDEV);
 if (process.env.ISDEV === 'false') {
-    console.log('running isdev');
     let i = 0;
     setInterval(async () => {
         await fetch('https://legends-kak-bot.herokuapp.com/');
