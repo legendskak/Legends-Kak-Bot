@@ -82,5 +82,3 @@ export default async function (msg, client) {
         });
     }
 }
-
-//msg.reactions.cache.get('484535447171760141').remove()

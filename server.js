@@ -19,7 +19,7 @@ import './bot.js';
 if (!process.env.ISDEV) {
     let i = 0;
     setInterval(async () => {
-        await fetch('https://tatsy-bot.herokuapp.com/');
+        await fetch('https://legends-kak-bot.herokuapp.com/');
         console.log(`PING! (${i})`);
         i++;
     }, 1740000);

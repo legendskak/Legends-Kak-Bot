@@ -4,6 +4,7 @@ async function getItem(item) {
     const serverData = await (await data.serverData.doc(item).get(item)).data()[
         'item'
     ];
+
     return await serverData;
 }
 
