@@ -1,15 +1,15 @@
 import data from '../config/connectToDataBase.js';
 
-async function getItem(item) {
-    const serverData = await (await data.serverData.doc(item).get(item)).data()[
+async function getsetItem(setItem) {
+    const serverData = await (await data.serverData.doc(setItem).get(setItem)).data()[
         'item'
     ];
 
     return await serverData;
 }
 
-function setItem(item, value) {
-    data.serverData.doc(item).set({
+function setsetItem(setItem, value) {
+    data.serverData.doc(setItem).set({
         item: value,
     });
 }
@@ -18,4 +18,4 @@ function createServer(guildName, guildID, defaultPrefix) {
     data.guildData.doc(guildName).set({});
 }
 
-export { getItem, setItem };
+export { getsetItem, setsetItem };
